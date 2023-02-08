@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>DashBoard EARNINGS</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <p th:text="'Tableau de bord pour : ' + ${ticker}" />
+    <p th:text="'incomeThisYear : ' + ${#numbers.formatCurrency(incomeThisYear)} " />
+    <p th:text="'revenueThisYear : ' + ${#numbers.formatCurrency(revenueThisYear)} " />
+</body>
+</html>

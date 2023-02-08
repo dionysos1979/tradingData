@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>DashBoard EARNINGS</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <table>
+        <tr th:if="${cotations}">
+            <td colspan="2"> No dates Available </td>
+        </tr>
+        <tr>
+            <td>cotationId</td>
+            <td>Date</td>
+            <td>maj</td>
+            <td>queryCount</td>
+            <td>count</td>
+            <td>resultsCount</td>
+            <td>request_id</td>
+            <td>status</td>
+        </tr>
+        <tr th:each="cotation : ${cotations}">
+            <td> <p th:text="'Id cotation: ' + ${cotation.cotationId}" /></td>
+            <td>  <p th:text="'Date Historique des cours : ' + ${#dates.format(cotation.date, 'dd/MM/yyyy')}" /></td>
+            <td> <p th:text="'Date MAJ : ' + ${#dates.format(cotation.maj, 'dd/MM/yyyy HH:mm:ss.SSS')}" /></td>
+            <td> <p th:text="'Nb Historique des cours : ' + ${cotation.queryCount}" /></td>
+            <td><p th:text="'Nb Historique des cours : ' + ${cotation.count}" /></td>
+            <td> <p th:text="'Nb results Historique des cours : ' + ${cotation.resultsCount}" /></td>
+            <td><p th:text="'request id Historique des cours pour : ' + ${cotation.request_id}" /></td>
+            <td> <p th:text="'Status : ' + ${cotation.status}" /></td>
+        </tr>
+    </table>
+</body>
+</html>

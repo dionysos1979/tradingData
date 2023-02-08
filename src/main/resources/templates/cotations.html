@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>DashBoard EARNINGS</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+<p th:text="'Id cotation: ' + ${cotations?.cotationId}" />
+
+<p th:text="'Id cotation: ' + ${cotations?.cotationId}" />
+<p th:text="'Date Historique des cours : ' + ${#dates.format(cotations?.date, 'dd/MM/yyyy')}" />
+<p th:text="'Date MAJ : ' + ${#dates.format(cotations?.maj, 'dd/MM/yyyy HH:mm:ss.SSS')}" />
+<p th:text="'Nb Historique des cours : ' + ${cotations?.queryCount}" />
+<p th:text="'Nb Historique des cours : ' + ${cotations?.count}" />
+<p th:text="'Nb results Historique des cours : ' + ${cotations?.resultsCount}" />
+<p th:text="'request id Historique des cours pour : ' + ${cotations?.request_id}" />
+<p th:text="'Status : ' + ${cotations?.status}" />
+
+    <table>
+        <tr th:if="${cotations?.results}">
+            <td colspan="2"> No quotes Available </td>
+        </tr>
+        <tr>
+            <td>Index</td>
+            <td>Ticker</td>
+            <td>Open</td>
+            <td>High</td>
+            <td>Low</td>
+            <td>Close</td>
+            <td>VWAP</td>
+            <td>Volume</td>
+        </tr>
+        <tr th:each="result, iter : ${cotations?.results}">
+            <td><span th:text="${iter.index}"></span></td>
+            <td><span th:text="${result.ticker}"> Ticker </span></td>
+            <td><span th:text="${#numbers.formatDecimal(result.close, 1, 2)}"> Open </span></td>
+            <td><span th:text="${#numbers.formatDecimal(result.high, 1, 2)}"> High </span></td>
+            <td><span th:text="${#numbers.formatDecimal(result.low, 1, 2)}"> Low </span></td>
+            <td><span th:text="${#numbers.formatDecimal(result.close, 1, 2)}"> Close </span></td>
+            <td><span th:text="${#numbers.formatDecimal(result.volumeWAP, 1, 2)}"> VWAP </span></td>
+            <td><span th:text="${#numbers.formatInteger(result.v, 1, 'WHITESPACE')}"> Volume </span></td>
+        </tr>
+    </table>
+</body>
+</html>

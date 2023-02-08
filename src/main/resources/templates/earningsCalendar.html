@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>DashBoard EARNINGS</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+Calendrier des Earnings :
+
+    <table>
+        <tr th:if="${earningsCalendar}">
+            <td colspan="2"> No earnings Available </td>
+        </tr>
+        <tr>
+            <td>Index</td>
+            <td>Id</td>
+            <td>Date</td>
+            <td>Ticker</td>
+            <td>Name</td>
+            <td>Report Date</td>
+            <td>Fiscal Date Ending</td>
+            <td>Estimated</td>
+            <td>Currency</td>
+        </tr>
+        <tr th:each="result, iter : ${earningsCalendar}">
+            <td><span th:text="${iter.index}"></span></td>
+            <td><span th:text="${result.id}">  </span></td>
+            <td><span th:text="${#dates.format(result.date, 'dd/MM/yyyy')}">  </span></td>
+            <td><span th:text="${result.ticker}">  </span></td>
+            <td><span th:text="${result.name}">  </span></td>
+            <td><span th:text="${#dates.format(result.reportDate, 'dd/MM/yyyy')}">  </span></td>
+            <td><span th:text="${#dates.format(result.fiscalDateEnding, 'dd/MM/yyyy')}">  </span></td>
+            <td><span th:text="${#numbers.formatDecimal(result?.estimate, 1, 2)}"> High </span></td>
+            <td><span th:text="${result.currency}">  </span></td>
+        </tr>
+    </table>
+
+</body>
+</html>

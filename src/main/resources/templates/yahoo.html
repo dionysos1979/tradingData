@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>DashBoard EARNINGS</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <p th:text="'RS cours pour : ' + ${ticker}" />
+
+    <table>
+        <tr>
+            <td><span> RS 1W </span></td>
+            <td><span th:text="${#numbers.formatPercent(rS1W, 0, 2)}"></span></td>
+        </tr>
+        <tr>
+            <td><span> RS 1M </span></td>
+            <td><span th:text="${#numbers.formatPercent(rS1M, 1, 2)}"></span></td>
+        </tr>
+        <tr>
+            <td><span> RS 3M </span></td>
+            <td><span th:text="${#numbers.formatPercent(rS3M, 2, 2)}"></span></td>
+        </tr>
+
+    </table>
+
+    <p th:text="'Historique des cours pour : ' + ${ticker}" />
+
+    <table>
+        <tr>
+            <td>Index</td>
+            <td>Date</td>
+            <td>Open</td>
+            <td>High</td>
+            <td>Low</td>
+            <td>Close</td>
+            <td>Adj Close</td>
+            <td>Volume</td>
+        </tr>
+        <tr th:if="${listeTriee.empty}">
+            <td colspan="2"> No historique Available </td>
+        </tr>
+        <tr th:each="cotation, iter : ${listeTriee}">
+            <td><span th:text="${iter.index}"></span></td>
+            <td><span th:text="${#dates.format(cotation.date, 'dd/MM/yyyy')}"> Date </span></td>
+            <td><span th:text="${cotation.open}"> Open </span></td>
+            <td><span th:text="${cotation.high}"> High </span></td>
+            <td><span th:text="${cotation.low}"> Low </span></td>
+            <td><span th:text="${cotation.close}"> Close </span></td>
+            <td><span th:text="${cotation.close}"> Adj Close </span></td>
+            <td><span th:text="${#numbers.formatInteger(cotation.v, 3, 'WHITESPACE')}"> Volume </span></td>
+        </tr>
+    </table>
+
+</body>
+</html>

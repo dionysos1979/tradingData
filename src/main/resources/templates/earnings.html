@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>DashBoard EARNINGS</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<p th:text="'Id earnings: ' + ${earnings?.id}" />
+<p th:text="'Date Historique des cours : ' + ${#dates.format(earnings?.date, 'dd/MM/yyyy')}" />
+<p th:text="'Nb Historique des cours : ' + ${earnings?.ticker}" />
+
+    <table>
+        <tr th:if="${earnings?.annualEarnings}">
+            <td colspan="2"> No earnings Available </td>
+        </tr>
+        <tr>
+            <td>Index</td>
+            <td>Id</td>
+            <td>fiscalDateEnding</td>
+            <td>reportedEPS</td>
+        </tr>
+        <tr th:each="result, iter : ${earnings?.annualEarnings}">
+            <td><span th:text="${iter.index}"></span></td>
+            <td><span th:text="${result.id}"> Id </span></td>
+            <td><span th:text="${#dates.format(result?.fiscalDateEnding, 'dd/MM/yyyy')}"> Open </span></td>
+            <td><span th:text="${#numbers.formatDecimal(result?.reportedEPS, 1, 2)}"> High </span></td>
+        </tr>
+    </table>
+
+
+
+<table>
+    <tr th:if="${earnings?.quarterlyEarnings}">
+        <td colspan="2"> No earnings Available </td>
+    </tr>
+    <tr>
+        <td>Index</td>
+        <td>Id</td>
+        <td>fiscalDateEnding</td>
+        <td>reportedDate</td>
+        <td>reportedEPS</td>
+        <td>estimatedEPS</td>
+        <td>surprise</td>
+        <td>surprisePercentage</td>
+    </tr>
+    <tr th:each="result, iter : ${earnings?.quarterlyEarnings}">
+        <td><span th:text="${iter.index}"></span></td>
+        <td><span th:text="${result?.id}"> Id </span></td>
+        <td><span th:text="${#dates.format(result?.fiscalDateEnding, 'dd/MM/yyyy')}"> Open </span></td>
+        <td><span th:text="${#dates.format(result?.reportedDate, 'dd/MM/yyyy')}"> Open </span></td>
+        <td><span th:text="${#numbers.formatDecimal(result?.reportedEPS, 1, 2)}"> High </span></td>
+        <td><span th:text="${#numbers.formatDecimal(result?.estimatedEPS, 1, 2)}"> High </span></td>
+        <td><span th:text="${#numbers.formatDecimal(result?.surprise, 1, 2)}"> High </span></td>
+        <td><span th:text="${#numbers.formatDecimal(result?.surprisePercentage, 1, 2)}"> High </span></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>DashBoard EARNINGS</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+    <table>
+        <tr th:if="${marketHoliday}">
+            <td colspan="2"> No dates Available </td>
+        </tr>
+        <tr>
+            <td>Index</td>
+            <td>Date</td>
+            <td>open</td>
+            <td>close</td>
+            <td>name</td>
+            <td>status</td>
+            <td>maj</td>
+            <td>exchange</td>
+        </tr>
+        <tr th:each="result, iter : ${marketHoliday}">
+            <td><span th:text="${iter.index}"></span></td>
+            <td><span th:text="${#dates.format(result.date, 'dd/MM/yyyy')}"></span></td>
+            <td><span th:text="${result.open ne null} ? ${result.open} : '(N/A)'"></span></td>
+            <td><span th:text="${result.close ne null} ? ${result.close} : '(N/A)'"></span></td>
+            <td><span th:text="${result.name}"></span></td>
+            <td><span th:text="${result.status}"></span></td>
+            <td><span th:text="${#dates.format(result.maj, 'dd/MM/yyyy : hh:mm:ss')}"></span></td>
+            <td><span th:text="${result.exchange}"></span></td>
+        </tr>
+    </table>
+</body>
+</html>
