@@ -112,7 +112,7 @@ public class DailyQuoteServiceTest {
 
     @Test
     public void updateCotations() throws ParseException {
-        Date debut = formatter.parse("2023-02-01");
+        Date debut = formatter.parse("2023-01-26");
         Date fin = formatter.parse("2023-02-03");
         dailyQuoteService.updateCotations(debut, fin);
     }
